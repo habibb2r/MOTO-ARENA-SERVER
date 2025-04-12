@@ -6,9 +6,8 @@ import mongoose from "mongoose"
 import Stripe from 'stripe'
 import config from "../../config"
 const stripe = new Stripe(config.stripe_key as string);
-/**
- * Checks if a product has sufficient stock for an order
- */
+
+
 const checkStockAvailability = async (productId: string, quantity: number) => {
   const product = await ProductServices.getSingleProduct(productId)
 
@@ -38,7 +37,6 @@ const createOrderIntoDB = async (payload: any) => {
       const totalPrice = Number(payload?.price) * Number(payload?.quantity);
       const currency = "usd";
 
-
       const paymentIntent = await stripe.paymentIntents.create(
           {
               amount: totalPrice,
@@ -46,10 +44,6 @@ const createOrderIntoDB = async (payload: any) => {
           },
           { idempotencyKey: payload?.orderId }
       );
-
-      console.log(paymentIntent, "paymentIntent");
-      // console.log("stripe", stripe);
-
 
       if (!paymentIntent?.client_secret) {
           await session.abortTransaction();
