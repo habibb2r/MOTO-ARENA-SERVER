@@ -97,21 +97,13 @@ const createOrderIntoDB = async (payload: any) => {
   }
 };
 
-const getRevenueFromDB = async () => {
-  const result = await Order.aggregate([
-    {
-      $group: {
-        _id: null,
-        totalRevenue: { $sum: { $toDouble: '$totalPrice' } },
-      },
-    },
-  ]);
-  const totalRevenue = result.length > 0 ? result[0].totalRevenue : 0;
-  return totalRevenue;
-};
+const getUserOrdersFromDB = async (payload: string) => {
+  const result = await Order.find({ 'userInfo.email': payload });
+  return result
+}
 
 export const OrderServices = {
   createOrderIntoDB,
-  getRevenueFromDB,
+  getUserOrdersFromDB,
   checkStockAvailability,
 };

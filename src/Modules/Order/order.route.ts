@@ -4,6 +4,6 @@ import { OrderController } from "./order.controller"
 const OrderRoutes = Router()
 
 OrderRoutes.post("/make-order", OrderController.makeOrder)
-OrderRoutes.get("/revenue", OrderController.getRevenue)
+OrderRoutes.get("/myorders/:email", OrderController.getUserOrders)
 
 export default OrderRoutes;

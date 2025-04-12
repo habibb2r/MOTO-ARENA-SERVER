@@ -10,26 +10,24 @@ const makeOrder = catchAsync(async (req: Request, res: Response) => {
   const result = await OrderServices.createOrderIntoDB(orderDoc);
   sendResponse(res, {
     success: true,
-    message: 'Order Place successfully',
+    message: 'Order created successfully',
     data: result,
     statusCode: StatusCodes.OK,
   });
 })
 
-const getRevenue = catchAsync(async (req: Request, res: Response) => {
-  const totalRevenue = await OrderServices.getRevenueFromDB()
-
+const getUserOrders = catchAsync(async (req: Request, res: Response) => {
+  const email = req.params.email;
+  const result = await OrderServices.getUserOrdersFromDB(email);
   sendResponse(res, {
-    statusCode: StatusCodes.OK,
-    message: "Revenue calculated successfully",
     success: true,
-    data: {
-      totalRevenue: totalRevenue,
-    },
-  })
+    message: 'Order Retrieved successfully',
+    data: result,
+    statusCode: StatusCodes.OK,
+  });
 })
 
 export const OrderController = {
   makeOrder,
-  getRevenue,
+  getUserOrders,
 }
