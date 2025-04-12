@@ -18,7 +18,7 @@ const createUserSchema = new Schema<TCreateUser, TLogin>(
     {
       timestamps: true,
       versionKey: false,
-      collection: 'bike-museum-users',
+      collection: 'users',
     },
   );
 
