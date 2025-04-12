@@ -7,7 +7,7 @@ import verifyCustomer from "../../middlewares/verifyCustomer";
 const UserRouter = Router();
 
 UserRouter.get("/all", verifyAdmin, UserController.getAllUsers);
-UserRouter.get('/getSingle/:email', verifyCustomer, UserController.getSingleUser);
+UserRouter.get('/userInfo/:email', verifyCustomer, UserController.getSingleUser);
 UserRouter.patch('/update', verifyAdmin, UserController.updateUserStatus);
 UserRouter.patch('/update/user', verifyCustomer,  UserController.updateUserProfile);
 UserRouter.patch('/update/password', verifyCustomer,  UserController.updateUserPassword);
