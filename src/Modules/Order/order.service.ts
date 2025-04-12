@@ -90,7 +90,7 @@ const createOrderIntoDB = async (payload: any) => {
 
     return paymentIntent;
   } catch (error) {
-    console.log(error, 'error');
+    // console.log(error, 'error');
     await session.abortTransaction();
     session.endSession();
     throw new AppError(StatusCodes.BAD_REQUEST, 'Failed to pay');

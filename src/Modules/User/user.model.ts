@@ -42,4 +42,4 @@ const createUserSchema = new Schema<TCreateUser, TLogin>(
     return await createUserModel.findOne({ email }).select('+password');
   };
   
-  export const createUserModel = model<TCreateUser, TLogin>('bike-museum-users', createUserSchema);
+  export const createUserModel = model<TCreateUser, TLogin>('users', createUserSchema);

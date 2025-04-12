@@ -6,7 +6,7 @@ import { StatusCodes } from "http-status-codes"
 
 const makeOrder = catchAsync(async (req: Request, res: Response) => {
   const orderDoc = req.body;
-  console.log(orderDoc, "orderDoc")
+  // console.log(orderDoc, "orderDoc")
   const result = await OrderServices.createOrderIntoDB(orderDoc);
   sendResponse(res, {
     success: true,

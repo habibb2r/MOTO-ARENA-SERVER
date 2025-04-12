@@ -41,4 +41,4 @@ productSchema.statics.createOrUpdate = async function (data: TProduct) {
 };
 
 
-export const Product = model<TProduct, TProductModel>('Product', productSchema);
+export const Product = model<TProduct, TProductModel>('products', productSchema);

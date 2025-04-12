@@ -32,4 +32,4 @@ const orderSchema = new Schema<TOrder>(
     }
 );
 
-export const Order = mongoose.model<TOrder>("Order", orderSchema);
+export const Order = mongoose.model<TOrder>("orders", orderSchema);
