@@ -96,7 +96,7 @@ const updateProduct = async (ProductId: string, payload: Partial<TProduct>, sess
 }
 
 const deleteProduct = async (ProductId: string) => {
-  const deleteSingleProduct = await Product.findOneAndUpdate({ id: ProductId }, { isDeleted: true }, { new: true })
+  const deleteSingleProduct = await Product.findByIdAndUpdate({ _id: ProductId }, { isDeleted: true }, { new: true })
   return deleteSingleProduct
 }
 
