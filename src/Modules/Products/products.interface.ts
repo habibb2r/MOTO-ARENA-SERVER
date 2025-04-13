@@ -6,7 +6,7 @@ export type TProduct = {
   price: number;
   brand: string;
   category: string;
-  photo?:string;
+  photo:string;
   description: string;
   quantity: number;
   inStock: boolean;

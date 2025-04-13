@@ -10,9 +10,8 @@ export const productSchema = new Schema<TProduct>(
     category: {
       type: String,
       required: true,
-      enum: ['Mountain', 'Road', 'Hybrid', 'Electric'],
     },
-    photo: { type: String},
+    photo: { type: String, required: true },
     description: { type: String, required: true },
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
