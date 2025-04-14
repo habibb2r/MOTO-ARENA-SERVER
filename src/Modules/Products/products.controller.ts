@@ -10,7 +10,7 @@ const createProduct = catchAsync(async (req: Request, res: Response) => {
 
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
-    message: "Successfully created Product",
+    message: 'Successfully created Product',
     data: result,
   });
 });
@@ -20,22 +20,23 @@ const getProducts = catchAsync(async (req: Request, res: Response) => {
   // console.log('hitted')
   sendResponse(res, {
     statusCode: StatusCodes.OK,
-    message: "Successfully fetched Products",
+    message: 'Successfully fetched Products',
     data: result,
   });
 });
 
-const getProductsCateAndBrand = catchAsync(async (req: Request, res: Response) => {
-  // console.log('hitted')
-  const result = await ProductServices.getAllCateAndBrand();
-  sendResponse(res, {
-    success: true,
-    message: 'Category fetched successfully ',
-    data: result,
-    statusCode: StatusCodes.OK,
-  });
-});
-
+const getProductsCateAndBrand = catchAsync(
+  async (req: Request, res: Response) => {
+    // console.log('hitted')
+    const result = await ProductServices.getAllCateAndBrand();
+    sendResponse(res, {
+      success: true,
+      message: 'Category fetched successfully ',
+      data: result,
+      statusCode: StatusCodes.OK,
+    });
+  },
+);
 
 const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
   // console.log(req.params);
@@ -44,12 +45,10 @@ const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
-    message: "Successfully fetched single Product",
+    message: 'Successfully fetched single Product',
     data: result,
   });
 });
-
-
 
 const updateProduct = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.productId;
@@ -58,22 +57,21 @@ const updateProduct = catchAsync(async (req: Request, res: Response) => {
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
-    message: "Successfully updated Product",
+    message: 'Successfully updated Product',
     data: result,
   });
 });
 
 const deleteProduct = catchAsync(async (req: Request, res: Response) => {
-  const id = req.params.ProductId;
+  const id = req.params.productId;
   const result = await ProductServices.deleteProduct(id);
 
   sendResponse(res, {
     statusCode: StatusCodes.OK,
-    message: "Successfully deleted Product",
+    message: 'Successfully deleted Product',
     data: result,
   });
 });
-
 
 export const ProductController = {
   createProduct,
@@ -81,5 +79,5 @@ export const ProductController = {
   getProductsCateAndBrand,
   getSingleProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
 };

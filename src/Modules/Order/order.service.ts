@@ -5,6 +5,7 @@ import { StatusCodes } from 'http-status-codes';
 import mongoose from 'mongoose';
 import Stripe from 'stripe';
 import config from '../../config';
+import { Product } from '../Products/products.model';
 const stripe = new Stripe(config.stripe_key as string);
 
 const checkStockAvailability = async (productId: string, quantity: number) => {
@@ -75,15 +76,22 @@ const createOrderIntoDB = async (payload: any) => {
           description: 'Your order has been delivered successfully.',
         },
       ],
-      orderActiveTrack: 1,
+      orderActiveTrack: 0,
     };
 
     const res = await Order.create([orderProduct], { session });
+    const updateQuantity = await Product.findByIdAndUpdate( {_id: payload?.productId}, {
+      $inc: { quantity: -payload?.quantity },
+    });
 
     if (!res) {
       await session.abortTransaction();
       session.endSession();
       throw new AppError(StatusCodes.BAD_REQUEST, 'Payment failed');
+    }else if(!updateQuantity) {
+      await session.abortTransaction();
+      session.endSession();
+      throw new AppError(StatusCodes.BAD_REQUEST, 'Stock update failed');
     }
     await session.commitTransaction();
     session.endSession();
@@ -102,8 +110,28 @@ const getUserOrdersFromDB = async (payload: string) => {
   return result
 }
 
+const getAllOrdersFromDB = async () => {
+  const result = await Order.find();
+  return result
+}
+
+const updateOrderStatusInDB = async(track:any)=>{
+  try {
+      const order = await Order.findByIdAndUpdate(track?.id,{
+          $set:{
+              orderActiveTrack:track?.trackId
+          }
+      } );
+      return order;
+  } catch (error) {
+      throw new AppError(StatusCodes.BAD_REQUEST, "Failed to update order status");
+  }
+}
+
 export const OrderServices = {
   createOrderIntoDB,
   getUserOrdersFromDB,
+  getAllOrdersFromDB,
+  updateOrderStatusInDB,
   checkStockAvailability,
 };

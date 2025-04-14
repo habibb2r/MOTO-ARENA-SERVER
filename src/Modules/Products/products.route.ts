@@ -6,19 +6,27 @@ import { Router } from 'express';
 
 const productRoutes = Router();
 
-productRoutes.get('/category-and-brand', ProductController.getProductsCateAndBrand);
+productRoutes.get(
+  '/category-and-brand',
+  ProductController.getProductsCateAndBrand,
+);
 productRoutes.post(
-  '/create-product', verifyAdmin,
+  '/create-product',
+  verifyAdmin,
   validateRequest(productValidation.productValidationSchema),
   ProductController.createProduct,
 );
 productRoutes.get('/', ProductController.getProducts);
+productRoutes.delete(
+  '/delete/:productId',
+  verifyAdmin,
+  ProductController.deleteProduct,
+);
 productRoutes.put(
   '/:productId',
   validateRequest(productValidation.updateProductValidationSchema),
   ProductController.updateProduct,
 );
 productRoutes.get('/:productId', ProductController.getSingleProduct);
-productRoutes.delete('/:productId', ProductController.deleteProduct);
 
-export default productRoutes
+export default productRoutes;
