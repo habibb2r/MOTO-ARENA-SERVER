@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 import { ProductServices } from '../Products/products.service';
 import { Order } from './order.model';
 import AppError from '../../ErrorHandlers/AppError';

@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'http://localhost:5000', 'https://bnnomuseum.pages.dev', 'http://localhost:5174'],
+    origin: ['http://localhost:5173', 'http://localhost:5000',  'http://localhost:5174'],
     credentials: true,
   }),
 );
@@ -26,7 +26,7 @@ app.use('/api/auth', AuthRouter);
 app.use('/api/user', UserRouter);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
+  res.send('WELCOME TO MOTO ARENA SERVER');
 });
 
 app.use(globalErrorHandler);
