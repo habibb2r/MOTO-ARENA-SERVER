@@ -16,6 +16,7 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: [
+      'https://moto-arena-habibb2r.pages.dev',
       'http://localhost:5173',
       'http://localhost:5000',
       'http://localhost:5174',
