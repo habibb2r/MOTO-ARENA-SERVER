@@ -19,14 +19,13 @@ export const productValidationSchema = z.object({
       invalid_type_error: 'Product price must be a number',
     })
     .min(1, 'Product price must be at least 1'),
-  category:  z
-  .string({
-    required_error: 'Product Category is required',
-  })
-  .trim()
-  .max(30, 'Product Category must be at most 30 characters'),
-  photo:  z
-  .string({
+  category: z
+    .string({
+      required_error: 'Product Category is required',
+    })
+    .trim()
+    .max(30, 'Product Category must be at most 30 characters'),
+  photo: z.string({
     required_error: 'Product Photo is required',
   }),
   description: z.string({

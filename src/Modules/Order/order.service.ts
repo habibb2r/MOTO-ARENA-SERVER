@@ -82,15 +82,18 @@ const createOrderIntoDB = async (payload: any) => {
     };
 
     const res = await Order.create([orderProduct], { session });
-    const updateQuantity = await Product.findByIdAndUpdate( {_id: payload?.productId}, {
-      $inc: { quantity: -payload?.quantity },
-    });
+    const updateQuantity = await Product.findByIdAndUpdate(
+      { _id: payload?.productId },
+      {
+        $inc: { quantity: -payload?.quantity },
+      },
+    );
 
     if (!res) {
       await session.abortTransaction();
       session.endSession();
       throw new AppError(StatusCodes.BAD_REQUEST, 'Payment failed');
-    }else if(!updateQuantity) {
+    } else if (!updateQuantity) {
       await session.abortTransaction();
       session.endSession();
       throw new AppError(StatusCodes.BAD_REQUEST, 'Stock update failed');
@@ -109,26 +112,29 @@ const createOrderIntoDB = async (payload: any) => {
 
 const getUserOrdersFromDB = async (payload: string) => {
   const result = await Order.find({ 'userInfo.email': payload });
-  return result
-}
+  return result;
+};
 
 const getAllOrdersFromDB = async () => {
   const result = await Order.find();
-  return result
-}
+  return result;
+};
 
-const updateOrderStatusInDB = async(track:any)=>{
+const updateOrderStatusInDB = async (track: any) => {
   try {
-      const order = await Order.findByIdAndUpdate(track?.id,{
-          $set:{
-              orderActiveTrack:track?.trackId
-          }
-      } );
-      return order;
+    const order = await Order.findByIdAndUpdate(track?.id, {
+      $set: {
+        orderActiveTrack: track?.trackId,
+      },
+    });
+    return order;
   } catch (error) {
-      throw new AppError(StatusCodes.BAD_REQUEST, "Failed to update order status");
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      'Failed to update order status',
+    );
   }
-}
+};
 
 export const OrderServices = {
   createOrderIntoDB,

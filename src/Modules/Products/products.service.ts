@@ -1,11 +1,11 @@
-import type { TProduct } from "./products.interface"
-import { Product } from "./products.model"
-import type mongoose from "mongoose"
+import type { TProduct } from './products.interface';
+import { Product } from './products.model';
+import type mongoose from 'mongoose';
 
 const createProduct = async (payload: TProduct): Promise<TProduct> => {
-  const result = await Product.createOrUpdate(payload)
-  return result
-}
+  const result = await Product.createOrUpdate(payload);
+  return result;
+};
 
 interface TQuery {
   search?: string;
@@ -40,18 +40,17 @@ const getProducts = async (queries: TQuery) => {
   }
 
   if (queries?.model) {
-    query.model = { $regex: queries?.model, $options: 'i' }
+    query.model = { $regex: queries?.model, $options: 'i' };
   }
 
   if (queries.brand) {
-    query.brand =  { $regex: queries?.brand, $options: 'i' }
+    query.brand = { $regex: queries?.brand, $options: 'i' };
   }
   if (queries.category) {
-    query.category =  { $regex: queries?.category, $options: 'i' }
+    query.category = { $regex: queries?.category, $options: 'i' };
   }
 
-  if(queries?.inStock){
-    
+  if (queries?.inStock) {
     query.inStock = queries?.inStock;
   }
   let limit;
@@ -62,43 +61,48 @@ const getProducts = async (queries: TQuery) => {
   return res;
 };
 
-
 const getAllCateAndBrand = async () => {
   return await Product.aggregate([
     {
       $group: {
         _id: null,
-        brands: { $addToSet: "$brand" },
-        categories: { $addToSet: "$category" }
-      }
+        brands: { $addToSet: '$brand' },
+        categories: { $addToSet: '$category' },
+      },
     },
     {
       $project: {
         _id: 0,
         brands: 1,
-        categories: 1
-      }
-    }
+        categories: 1,
+      },
+    },
   ]);
-
-}
-
+};
 
 const getSingleProduct = async (ProductId: string) => {
-  const result = await Product.findById(ProductId)
-  return result
-}
+  const result = await Product.findById(ProductId);
+  return result;
+};
 
-const updateProduct = async (ProductId: string, payload: Partial<TProduct>, session?: mongoose.ClientSession) => {
-  const options = session ? { new: true, session } : { new: true }
-  const result = await Product.findByIdAndUpdate(ProductId, payload, options)
-  return result
-}
+const updateProduct = async (
+  ProductId: string,
+  payload: Partial<TProduct>,
+  session?: mongoose.ClientSession,
+) => {
+  const options = session ? { new: true, session } : { new: true };
+  const result = await Product.findByIdAndUpdate(ProductId, payload, options);
+  return result;
+};
 
 const deleteProduct = async (ProductId: string) => {
-  const deleteSingleProduct = await Product.findByIdAndUpdate({ _id: ProductId }, { isDeleted: true }, { new: true })
-  return deleteSingleProduct
-}
+  const deleteSingleProduct = await Product.findByIdAndUpdate(
+    { _id: ProductId },
+    { isDeleted: true },
+    { new: true },
+  );
+  return deleteSingleProduct;
+};
 
 export const ProductServices = {
   createProduct,
@@ -107,4 +111,4 @@ export const ProductServices = {
   getSingleProduct,
   updateProduct,
   deleteProduct,
-}
+};

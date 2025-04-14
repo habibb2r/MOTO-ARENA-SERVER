@@ -49,23 +49,21 @@ const updateUserProfile = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 const updateUserPassword = catchAsync(async (req: Request, res: Response) => {
-  
-    const getUpdatePassword = req.body;
-    const result = await UserServices.updateUserPasswordInDB(getUpdatePassword);
-    sendResponse(res, {
-      success: true,
-      message: 'Updated User Password Successfully',
-      data: result,
-      statusCode: StatusCodes.OK,
-    });
-  })
+  const getUpdatePassword = req.body;
+  const result = await UserServices.updateUserPasswordInDB(getUpdatePassword);
+  sendResponse(res, {
+    success: true,
+    message: 'Updated User Password Successfully',
+    data: result,
+    statusCode: StatusCodes.OK,
+  });
+});
 
 export const UserController = {
   getAllUsers,
   getSingleUser,
   updateUserStatus,
   updateUserProfile,
-  updateUserPassword
+  updateUserPassword,
 };

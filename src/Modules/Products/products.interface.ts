@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { Model } from "mongoose";
+import { Model } from 'mongoose';
 
 export type TProduct = {
   name: string;
   price: number;
   brand: string;
   category: string;
-  photo:string;
+  photo: string;
   description: string;
   quantity: number;
   inStock: boolean;

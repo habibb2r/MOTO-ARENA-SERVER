@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Response } from 'express';
 
 type TMeta = {
   limit: number;
@@ -12,7 +12,7 @@ type TSendResponse<T> = {
   statusCode: number;
   message: string;
   data: T | T[] | null;
-  meta?: TMeta; 
+  meta?: TMeta;
 };
 
 const sendResponse = <T>(res: Response, data: TSendResponse<T>) => {
@@ -20,7 +20,7 @@ const sendResponse = <T>(res: Response, data: TSendResponse<T>) => {
     success: data.success ?? true,
     statusCode: data.statusCode,
     message: data.message,
-    meta: data.meta, 
+    meta: data.meta,
     data: data.data,
   });
 };

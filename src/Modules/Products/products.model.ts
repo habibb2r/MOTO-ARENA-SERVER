@@ -20,7 +20,7 @@ export const productSchema = new Schema<TProduct>(
   { timestamps: true },
 );
 
-productMiddleware()
+productMiddleware();
 
 productSchema.statics.createOrUpdate = async function (data: TProduct) {
   const { name, brand, quantity } = data;
@@ -39,5 +39,7 @@ productSchema.statics.createOrUpdate = async function (data: TProduct) {
   }
 };
 
-
-export const Product = model<TProduct, TProductModel>('products', productSchema);
+export const Product = model<TProduct, TProductModel>(
+  'products',
+  productSchema,
+);

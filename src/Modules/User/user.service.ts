@@ -66,7 +66,7 @@ const updateUserProfileInDB = async (payload: any) => {
     );
     const result = data?.modifiedCount > 0 ? { name: payload?.name } : {};
     return result;
-  // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
   } catch (error) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
@@ -129,5 +129,5 @@ export const UserServices = {
   getSingleUserFromDB,
   updateUserStatusInDB,
   updateUserProfileInDB,
-  updateUserPasswordInDB
+  updateUserPasswordInDB,
 };
