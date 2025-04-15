@@ -12,8 +12,7 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
     isBlocked: false,
     isActive: true,
     role: 'customer',
-    photoURL:
-      'https://res.cloudinary.com/dairs3nkn/image/upload/v1744097456/habibb2r/zuoz1s1iqhzf8t0ioylo.jpg',
+    photoURL: getData?.photoURL || '',
   };
 
   const result = await AuthServices.createUserIntoDB(userData);
