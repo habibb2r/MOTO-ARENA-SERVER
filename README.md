@@ -38,24 +38,24 @@ Before you begin, ensure you have the following installed:
 
 ### Clone the Repository
 
-\`\`\`bash
+```bash
 git clone https://github.com/habibb2r/MOTO-ARENA-SERVER.git
 cd MOTO-ARENA-SERVER
-\`\`\`
+```
 
 ### Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
 # or
 yarn install
-\`\`\`
+```
 
 ### Environment Variables
 
-Create a \`.env\` file in the root directory and add the following variables:
+Create a `.env` file in the root directory and add the following variables:
 
-\`\`\`env
+```env
 NODE_ENV=development
 PORT=5000
 DB_URL=your_mongodb_connection_string
@@ -64,25 +64,25 @@ JWT_REFRESH_SECRET=your_jwt_refresh_secret_key
 JWT_ACCESS_EXPIRES_IN=10d
 JWT_REFRESH_EXPIRES_IN=365d
 STRIPE_SECRET_KEY=your_stripe_secret_key
-\`\`\`
+```
 
 ### Running the Server
 
 For development:
-\`\`\`bash
+```bash
 npm run start:dev
 # or
 yarn start:dev
-\`\`\`
+```
 
 For production build:
-\`\`\`bash
+```bash
 npm run build
 npm start
 # or
 yarn build
 yarn start
-\`\`\`
+```
 
 ## API Endpoints
 
