@@ -88,7 +88,8 @@ const createOrderIntoDB = async (payload: any) => {
         $inc: { quantity: -payload?.quantity },
       },
     );
-
+    await Product.updateMany({quantity: 0}, {$set:{inStock: false}})
+    console.log(updateQuantity, 'updateQuantity');
     if (!res) {
       await session.abortTransaction();
       session.endSession();
